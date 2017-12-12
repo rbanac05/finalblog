@@ -1,0 +1,30 @@
+---
+title: Time Series
+author: ''
+date: '2017-12-11'
+slug: time-series
+categories: []
+tags: []
+---
+
+```{r warning=FALSE, message=FALSE}
+library(sqldf)
+library(Lahman)
+library(ggplot2)
+```
+
+Time series are similar to scatter plots in that you can have dots on the graph, but we mostly look at the line showing the trend of data.
+
+```{r}
+query<- "SELECT yearID, HR
+FROM Batting
+WHERE playerID='ruthba01'"
+result<-sqldf(query)
+
+ggplot()+
+  geom_line(data=result,aes(x=yearID,y=HR))+
+  ggtitle("Ruth's Home Runs of the Years")+
+  xlab("Year")+
+  ylab("Home Runs")
+```
+

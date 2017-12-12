@@ -1,0 +1,33 @@
+---
+title: Scatter Plot
+author: ''
+date: '2017-12-11'
+slug: scatter-plot
+categories:
+  - R
+tags: []
+---
+
+
+
+<pre class="r"><code>library(sqldf)
+library(Lahman)
+library(ggplot2)</code></pre>
+<p>A scatter plot is a data representation through dots.</p>
+<pre class="r"><code>#Extractcing Data----------------------------
+
+query&lt;-&quot;SELECT playerID,sum(HR) AS career_HR ,sum(SO) AS career_SO 
+FROM Batting
+GROUP BY playerID
+HAVING sum(HR)&gt;=400&quot;
+
+result&lt;-sqldf(query)
+
+#Visulaizing Data----------------------------
+
+ggplot()+
+  geom_point(data=result,aes(x=career_SO,y=career_HR), size=3, color=&quot;blue&quot;)+
+  ggtitle(&quot;Career Strikeouts vs. Homeruns for Great Hitters&quot;)+
+  xlab(&quot;Career Strikeouts&quot;)+
+  ylab(&quot;Career Homerunes&quot;)</code></pre>
+<p><img src="/post/2017-12-11-scatter-plot_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>

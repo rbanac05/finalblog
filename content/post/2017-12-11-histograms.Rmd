@@ -1,0 +1,28 @@
+---
+title: Histograms
+author: ''
+date: '2017-12-11'
+slug: histograms
+categories: []
+tags: []
+---
+
+```{r warning=FALSE,message=FALSE}
+library(sqldf)
+library(Lahman)
+library(ggplot2)
+```
+
+Histograms are data visualizations that use one value of data.
+
+```{r}
+query<-"SELECT weight
+FROM Master"
+
+result<-sqldf(query)
+
+ggplot()+
+  geom_histogram(data=result,aes(x=weight),color="green",fill="white",bins=50)+
+  ggtitle("Body Weight Distribution for Baseball Players")
+```
+
